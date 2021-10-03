@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>aspnet-Final_Proyect-F77F2C12-999D-4E7D-AB3C-65734E44AFD4</UserSecretsId>
     <RootNamespace>Final_Proyect</RootNamespace>
   </PropertyGroup>
@@ -16,6 +16,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.18" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.18" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.18" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Final-Project.Entity\Final-Project.Entity.csproj" />
   </ItemGroup>
 
 </Project>
