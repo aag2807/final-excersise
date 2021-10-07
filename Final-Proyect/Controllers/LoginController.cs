@@ -1,11 +1,11 @@
 ﻿using Final_Project.Entity;
 using Final_Proyect.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace Final_Proyect.Controllers
 {
@@ -27,10 +27,15 @@ namespace Final_Proyect.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Validate(Usuario model)
         {
-            if (ModelState.IsValid) { 
-               
-            }
+            if (ModelState.IsValid) {
+                HttpContext.Session.SetString("Session", JsonConvert.SerializeObject(model));
+                //var priceDetails = HttpContext.Session.GetString("Session");
+                return RedirectToAction("Index");
+            } else
+            {
                 return View();
+            }
+                
         }
     }
 }
