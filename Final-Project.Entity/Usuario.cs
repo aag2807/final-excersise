@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Final_Project.Entity
 {
+    [Table("T_usuario")]
     public class Usuario
     {
+        [Key]
         public int ID_Usuario { get; set; }
         public string Username { get; set; }
         [Required(ErrorMessage = "La contraseña es requerida")]
