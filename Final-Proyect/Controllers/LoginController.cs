@@ -44,7 +44,6 @@ namespace Final_Proyect.Controllers
                     ModelState.AddModelError(nameof(Usuario.Password), "Email or Password not found or matched");
                     return View(model);
                 }
-                //var priceDetails = HttpContext.Session.GetString("Session");
             } else
             {
                 ModelState.AddModelError(nameof(Usuario), "Error en el modelo");
