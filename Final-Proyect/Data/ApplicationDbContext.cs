@@ -15,7 +15,7 @@ namespace Final_Proyect.Data
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
-        //public DbSet<Cuenta> Cuentas { get; set; }
-        //public DbSet<HistoricoTransferencia> HistoricoTransferencias { get; set; }
+        public DbSet<Cuenta> Cuentas { get; set; }
+        public DbSet<HistoricoTransferencia> HistoricoTransferencias { get; set; }
     }
 }
