@@ -57,11 +57,10 @@ namespace Final_Proyect.Controllers
                 ViewData["error"] = true;
                 return View();
             }
-            var _rng = RandomNumberGenerator.Create();
 
             var newItemToAdd = new HistoricoTransferencia();
             newItemToAdd.Id = transfer.Id;
-            newItemToAdd.No_transferencia = (transfer.Id).ToString(32);
+            newItemToAdd.No_transferencia = (transfer.Id).ToString();
             newItemToAdd.Monto = transfer.Monto;
             newItemToAdd.Fecha = Convert.ToDateTime(transfer.Fecha);
             newItemToAdd.No_cuentaEmisor = transfer.No_cuentaEmisor;
