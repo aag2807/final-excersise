@@ -11,8 +11,7 @@ namespace Final_Project.Entity
     [Table("T_cuenta")]
     public class Cuenta
     {
-        [Key]
-        public int Id_cuenta { get; set; }
+        public int Id { get; set; }
         public string Tipo_Cuenta { get; set; }
         public string No_Cuenta { get; set; }
         public double Balance { get; set; }

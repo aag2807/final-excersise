@@ -11,8 +11,7 @@ namespace Final_Project.Entity
     [Table("T_Htransferencia")]
     public class HistoricoTransferencia
     {
-        [Key]
-        public int Id_HistoricoTranf { get; set; }
+        public int Id { get; set; }
         public string No_transferencia { get; set; }
         public double Monto { get; set; }
         public DateTime Fecha { get; set; }

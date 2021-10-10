@@ -11,8 +11,7 @@ namespace Final_Project.Entity
     [Table("T_usuario")]
     public class Usuario
     {
-        [Key]
-        public int ID_Usuario { get; set; }
+        public int Id { get; set; }
         public string Username { get; set; }
         [Required(ErrorMessage = "La contraseña es requerida")]
         [DataType(DataType.Password)]
@@ -22,6 +21,5 @@ namespace Final_Project.Entity
         [Required(ErrorMessage = "El email es requerido")]
         [EmailAddress(ErrorMessage = "Email invalido")]
         public string Email { get; set; }
-
     }
 }
