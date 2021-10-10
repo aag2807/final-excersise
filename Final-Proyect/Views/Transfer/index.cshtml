@@ -1,0 +1,257 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+
+<section class="payment-form ">
+    @if ((bool)ViewData["error"])
+    {
+        <div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
+            <div class="toast-header">
+                <strong class="mr-auto">Error</strong>
+                <small>11 mins ago</small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+              Ha ocurrido un error, Favor verifique el numero de cuenta del receptor.
+            </div>
+        </div>
+    }
+    <div class="container">
+        <div class="block-heading">
+            <h2>Transferencia</h2>
+            <p>Realiza una transferencia a otra cuenta</p>
+        </div>
+        <form method="post">
+            <input id="id" name="Id" style="visibility: hidden;">
+            <div class="products">
+                <h3 class="title">Cuenta Emisora</h3>
+                <div class="item">
+                    <input class="item-name form-control" readonly name="No_cuentaEmisor" value="000000001">
+                </div>
+                <h3 class="title">Cuenta Receptora</h3>
+                <div class="item">
+                    <input class="item-name form-control" readonly id="receivingAccount" name="No_CuentaReceptor"
+                        value="">
+                    <p class="item-name"></p>
+                </div>
+            </div>
+            <div class="card-details">
+                <h3 class="title">Detalles de cuenta</h3>
+                <div class="row">
+
+                    <div class="form-group col-sm-5">
+                        <label for="card-holder">Nombre del receptor</label>
+                        <input id="card-holder" type="text" class="form-control" name="Nombre" placeholder="Nombre"
+                            aria-label="Nombre" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="form-group col-sm-7">
+                        <label for="">Numbero de Cuenta</label>
+                        <div class="input-group expiration-date">
+                            <input type="text" class="form-control" id="accountNum" placeholder="Numero de Cuenta"
+                                aria-label="Numero de Cuenta" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                        <label for="card-number">Banco Destinatario</label>
+                        <input id="card-number" type="text" class="form-control"
+                            placeholder="Nombre del banco destinatario" aria-label="Nombre del banco destinatario"
+                            aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                        <label for="cvc">Tipo de Cuenta</label>
+                        <input id="Tipo_Cuenta" name="Tipo_Cuenta" id="Tipo_Cuenta" type="text" class="form-control"
+                            placeholder="Tipo de Cuenta" readonly aria-label="numero de id"
+                            aria-describedby="basic-addon1">
+                        <br>
+                        <select class="form-control" id="accountType">
+                            <option value="AHORRO">Ahorro</option>
+                            <option value="CORRIENTE">Corriente</option>
+                            <option value="OTRAS">Otra</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                        <label for="cvc">Documento de identidad</label>
+
+                        <select class="form-control">
+                            <option value="Cedula">Cedula</option>
+                            <option value="Pasaporte">Pasaporte</option>
+                        </select>
+                        <br>
+                        <input id="cvc" type="text" class="form-control" placeholder="Numero de identificacion"
+                            aria-label="numero de id" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                        <label for="cvc">Fecha de transferencia</label>
+
+                        <br>
+                        <input id="cvc" type="date" class="form-control" name="Fecha" aria-label="numero de id"
+                            aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                        <label for="cvc">Monto a Transferir</label>
+                        <br>
+                        <input id="cvc" type="number" class="form-control" name="Monto" aria-label="monto a transferir"
+                            min="1" aria-describedby="basic-addon1">
+                    </div>
+
+
+                    <div class="form-group col-sm-12">
+                        <button type="submit" class="btn btn-primary btn-block">Transferir</button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+
+    (() => {
+        document.getElementById('id').value = Math.random(0, 10).toString(34).substr(0, 6)
+    })()
+
+    document.querySelector('#accountNum').addEventListener('keyup', (e) => {
+        let { value } = e.target;
+        document.getElementById('receivingAccount').value = value;
+    })
+
+    document.getElementById('accountType').addEventListener('change', (e) => {
+        let { value } = e.target;
+        document.getElementById('Tipo_Cuenta').value = value.toLowerCase();
+    })
+
+</script>
+
+<style>
+    .payment-form {
+        padding-bottom: 50px;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .payment-form.dark {
+        background-color: #f6f6f6;
+    }
+
+    .payment-form .content {
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+        background-color: white;
+    }
+
+    .payment-form .block-heading {
+        padding-top: 50px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .payment-form .block-heading p {
+        text-align: center;
+        max-width: 420px;
+        margin: auto;
+        opacity: 0.7;
+    }
+
+    .payment-form.dark .block-heading p {
+        opacity: 0.8;
+    }
+
+    .payment-form .block-heading h1,
+    .payment-form .block-heading h2,
+    .payment-form .block-heading h3 {
+        margin-bottom: 1.2rem;
+        color: #3b99e0;
+    }
+
+    .payment-form form {
+        border-top: 2px solid #5ea4f3;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+        background-color: #ffffff;
+        padding: 0;
+        max-width: 600px;
+        margin: auto;
+    }
+
+    .payment-form .title {
+        font-size: 1em;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        margin-bottom: 0.8em;
+        font-weight: 600;
+        padding-bottom: 8px;
+    }
+
+    .payment-form .products {
+        background-color: #f7fbff;
+        padding: 25px;
+    }
+
+    .payment-form .products .item {
+        margin-bottom: 1em;
+    }
+
+    .payment-form .products .item-name {
+        font-weight: 600;
+        font-size: 0.9em;
+    }
+
+    .payment-form .products .item-description {
+        font-size: 0.8em;
+        opacity: 0.6;
+    }
+
+    .payment-form .products .item p {
+        margin-bottom: 0.2em;
+    }
+
+    .payment-form .products .price {
+        float: right;
+        font-weight: 600;
+        font-size: 0.9em;
+    }
+
+    .payment-form .products .total {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        margin-top: 10px;
+        padding-top: 19px;
+        font-weight: 600;
+        line-height: 1;
+    }
+
+    .payment-form .card-details {
+        padding: 25px 25px 15px;
+    }
+
+    .payment-form .card-details label {
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #79818a;
+        text-transform: uppercase;
+    }
+
+    .payment-form .card-details button {
+        margin-top: 0.6em;
+        padding: 12px 0;
+        font-weight: 600;
+    }
+
+    .payment-form .date-separator {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 5px;
+    }
+</style>
