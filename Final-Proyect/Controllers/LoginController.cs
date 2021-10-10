@@ -14,8 +14,7 @@ namespace Final_Proyect.Controllers
     public class LoginController : Controller
     {
         private readonly ApplicationDbContext _context;
-       
-        public string lblMessage { get; set; }
+      
         public LoginController(ApplicationDbContext context)
         {
             _context = context;
@@ -38,7 +37,7 @@ namespace Final_Proyect.Controllers
                 if (user != null)
                 {
                     HttpContext.Session.SetString("Session", JsonConvert.SerializeObject(user));
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Index","Resumen");
                 } else
                 {
                     ModelState.AddModelError(nameof(Usuario.Password), "Email or Password not found or matched");
