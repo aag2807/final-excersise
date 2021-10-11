@@ -40,7 +40,8 @@ namespace Final_Proyect.Controllers
                     _context
                         .Cuentas
                         .SingleOrDefault(x =>
-                            x.No_Cuenta.ToString() == transfer.No_CuentaReceptor.ToString());
+                            x.No_Cuenta.ToString() ==
+                            transfer.No_CuentaReceptor.ToString());
                 userRef =
                     _context
                         .Usuarios
@@ -57,20 +58,22 @@ namespace Final_Proyect.Controllers
                 ViewData["error"] = true;
                 return View();
             }
+            else
+            {
+                var newItemToAdd = new HistoricoTransferencia();
+                newItemToAdd.Id = transfer.Id;
+                newItemToAdd.No_transferencia = (transfer.Id).ToString();
+                newItemToAdd.Monto = transfer.Monto;
+                newItemToAdd.Fecha = Convert.ToDateTime(transfer.Fecha);
+                newItemToAdd.No_cuentaEmisor = transfer.No_cuentaEmisor;
+                newItemToAdd.No_CuentaReceptor = transfer.No_CuentaReceptor;
+                newItemToAdd.Id_Cuenta = accountRef.Id;
+                newItemToAdd.Cuenta = accountRef;
 
-            var newItemToAdd = new HistoricoTransferencia();
-            newItemToAdd.Id = transfer.Id;
-            newItemToAdd.No_transferencia = (transfer.Id).ToString();
-            newItemToAdd.Monto = transfer.Monto;
-            newItemToAdd.Fecha = Convert.ToDateTime(transfer.Fecha);
-            newItemToAdd.No_cuentaEmisor = transfer.No_cuentaEmisor;
-            newItemToAdd.No_CuentaReceptor = transfer.No_CuentaReceptor;
-            newItemToAdd.Id_Cuenta = accountRef.Id;
-            newItemToAdd.Cuenta = accountRef;
-
-            _context.Add<HistoricoTransferencia>(newItemToAdd);
-            _context.SaveChanges();
-            return View();
+                _context.Add<HistoricoTransferencia> (newItemToAdd);
+                _context.SaveChanges();
+                return View();
+            }
         }
     }
 }
