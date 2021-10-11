@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Final_Proyect.Models;
 using Microsoft.AspNetCore.Authorization;
+using Final_Proyect.Attribute;
 
 namespace Final_Proyect.Controllers
 {
@@ -18,7 +19,7 @@ namespace Final_Proyect.Controllers
         {
             _logger = logger;
         }
-        [Authorize]
+        [CustomAttributes]
         public IActionResult Index()
         {
             return View();
@@ -28,7 +29,7 @@ namespace Final_Proyect.Controllers
         {
             return View();
         }
-        [Authorize]
+        [CustomAttributes]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
