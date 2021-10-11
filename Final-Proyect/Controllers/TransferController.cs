@@ -68,7 +68,7 @@ namespace Final_Proyect.Controllers
             newItemToAdd.Id_Cuenta = accountRef.Id;
             newItemToAdd.Cuenta = accountRef;
 
-            _context.Add<HistoricoTransferencia> (newItemToAdd);
+            _context.Add<HistoricoTransferencia>(newItemToAdd);
             _context.SaveChanges();
             return View();
         }
