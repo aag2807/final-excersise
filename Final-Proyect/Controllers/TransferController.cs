@@ -40,7 +40,7 @@ namespace Final_Proyect.Controllers
                     _context
                         .Cuentas
                         .SingleOrDefault(x =>
-                            x.No_Cuenta == transfer.No_CuentaReceptor);
+                            x.No_Cuenta.ToString() == transfer.No_CuentaReceptor.ToString());
                 userRef =
                     _context
                         .Usuarios

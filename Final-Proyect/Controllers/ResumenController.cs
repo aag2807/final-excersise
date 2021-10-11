@@ -25,7 +25,7 @@ namespace Final_Proyect.Controllers
             IEnumerable<Cuenta> Cuentas = new List<Cuenta>();
             ViewData["Sesion"] = true;
             ViewData["Nombre"] = obj.Name + " " + obj.Lastname;
-            var userId = obj.ID_Usuario;
+            var userId = obj.Id;
             Cuentas = _context.Cuentas.Include(x => x.Usuario).ToList().Where(l => l.Id_usuario == userId);
             return View("Resumen",Cuentas);
         }

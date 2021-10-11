@@ -19,6 +19,7 @@ namespace Final_Proyect.Controllers
         {
             _logger = logger;
         }
+        
         [CustomAttributes]
         public IActionResult Index()
         {
