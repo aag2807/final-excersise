@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<Final_Project.Entity.Cuenta>
+@{
+}
+
+<style>
+
+</style>
+
+
+<div class = "container">
+    <div class = "w-100">
+        <h4 class = "text-center">Mis Productos</h4>
+    </div>
+
+    <div class="content-cuenta">
+        <div class="row w-100">
+            @foreach (var cuenta in Model)
+            {
+
+                <div class="col-md-4 mt-4">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            @*<h5 class="card-title">Card title</h5>*@
+                            <h6 class="card-subtitle mb-2 text-muted">Cuenta de @cuenta.Tipo_Cuenta</h6>
+                            <h4>RD$ @cuenta.Balance</h4>
+                            <p class="card-text">Balance disponible</p>
+                            <a href="#" class="card-link">Historico</a>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+       </div>
+</div>

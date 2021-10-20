@@ -1,0 +1,233 @@
+@{
+    ViewData["Title"] = "Transacciones";
+}
+
+
+
+<!-- START OF MODAL -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width:110%;height:500px;">
+            <div class="modal-body p-0">
+                <div class="row" style="padding:0rem 0.92rem 0rem 0.92rem !important;height:100%;">
+                    <div class="col-xs-4 bg-success text-light d-flex flex-column justify-content-center align-items-center"
+                        style="width:250px;">
+                        <div class="info-box">
+                            <i class="bi bi-wallet-fill d-block text-light" style="font-size:50px;"></i>
+                            <h4 class="font-weight-light text-light" id="destination"></h4>
+                            <h3 class="font-weight-light text-light" id="amount"></h3>
+                            <h5 class="font-weight-light text-light" id="date"></h5>
+                        </div>
+                    </div>
+                    <div class="col-xs-8 pt-3" style="width:50%;">
+                        <h6 style="width:60%;margin:0px;padding:0px;display:inline;" class="ml-4">
+                            Detalles de transaccion
+                        </h6>
+                        <span type="button" class="btn btn-link ml-auto d-inline" data-dismiss="modal"
+                            aria-label="Close">
+                            <i class="bi bi-x-lg"></i>
+                        </span>
+                        <hr class="mt-0 ml-4" style="width:90%;" />
+                        <div class="m-row mt-0 ml-4">
+                            <p>Monto de Pago</p>
+                            <p style="margin-left:auto;" id="amount"></p>
+                        </div>
+                        <div class="m-row mt-2 ml-4">
+                            <div class="col p-0">
+                                <p class="p-0 m-0">Enviado Por</p>
+                                <p class="subText" id="sentBy"></p>
+                            </div>
+                        </div>
+
+                        <div class="m-row mt-2 ml-4">
+                            <div class="col p-0">
+                                <p class="p-0 m-0">ID de Transaccion</p>
+                                <p class="subText" id="transerNum"></p>
+                            </div>
+                        </div>
+
+                        <div class="m-row mt-2 ml-4">
+                            <div class="col p-0">
+                                <p class="p-0 m-0">Fecha de Transaccion</p>
+                                <p class="subText" id="date"></p>
+                            </div>
+                        </div>
+
+                        <div class="m-row mt-2 ml-4">
+                            <div class="col p-0">
+                                <p class="p-0 m-0">Status</p>
+                                <p class="subText">Completado</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- END OF MODAL -->
+
+<!--START OF TABLE -->
+<main id="main" class="container">
+
+    <h1 class="mt-5">Transaction</h1>
+
+    <table class="table table-striped table-hover  table-bordered">
+        <thead>
+            <tr>
+                <th class="first" scope="col">Fecha</th>
+                <th class="second" scope="col">Descripcion</th>
+                <th class="third" scope="col">status</th>
+                <th class="fourth" scope="col">monto</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            
+    @foreach (var item in ViewData["T"] as IEnumerable<Final_Project.Entity.HistoricoTransferencia>)
+    {
+      <tr 
+        data-toggle="modal" 
+        data-target="#exampleModal" 
+        onclick="setModalData('@item.No_CuentaReceptor', `$${@item.Monto} `, '@item.Fecha', '@item.No_cuentaEmisor', '@item.No_transferencia')" 
+        > 
+
+                <th class="first" scope="row">
+                    <div class="column-text" style="display:flex; flex-direction:column;">
+                        <p> @item.Fecha</p>
+                    </div>
+                </th>
+                <td class="second" scope="row">
+                    <div class="column-text" style="display:flex; flex-direction:column;">
+                        <p>Cuenta Emisora</p>
+                        <p>@item.No_cuentaEmisor</p>
+                    </div>
+                </td>
+                <td class="third">
+                    <i class="bi bi-check-circle-fill text-success align-center"></i>
+                </td>
+                <td class="fourth">
+                    <div class="column-text" style="display:flex; flex-direction:column;">
+                        <p>
+                            $@item.Monto
+                        </p>
+                    </div>
+                </td>
+            </tr>
+        }
+
+          
+
+        </tbody>
+    </table>
+
+</main>
+<!--END OF TABLE -->
+
+<script>
+    (() => {
+        document.title = "Transacciones";
+    })()
+
+    const setModalData = (receivingAccount, amount, dates, sendingAccount, transferNum) => {
+        document.querySelector('#destination').textContent = receivingAccount;
+        document.querySelectorAll('#amount').forEach(node => {
+            node.textContent = amount
+        })
+        document.querySelectorAll('#date').forEach(node => {
+            node.textContent = dates.split(" ")[0];
+        }) 
+        document.querySelector('#sentBy').textContent = sendingAccount
+        document.querySelector('#transerNum').textContent =transferNum
+    }
+
+</script>
+
+<style>
+    #main {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+    }
+
+    .pagination {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .first {
+        width: 50px;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    .second {
+        margin-left: 20px;
+    }
+
+    .third {
+        width: 30px !important;
+    }
+
+    .third>i {
+        display: block;
+        text-align: center;
+    }
+
+    .fourth {
+        text-align: center;
+    }
+
+    table,
+    tr,
+    th,
+    td,
+    thead {
+        font-weight: 400 !important;
+    }
+
+    tr:hover {
+        cursor: pointer;
+    }
+
+    .column-text>p {
+        margin: 0px;
+        padding: 0px;
+        font-size: 0.8rem;
+        user-select: none;
+        color: #605F5C;
+    }
+
+
+    .info-box {
+        width: 200px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+
+    .m-row {
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .subText {
+        margin: 0px;
+        padding: 0px;
+        font-size: 0.8rem;
+        color: #605F5C;
+        user-select: none;
+    }
+
+    table>* {}
+</style>
